@@ -1,6 +1,5 @@
 package com.api.TUniverso.model;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="usuarios")
+@Table(name = "usuarios")
 public class Usuario {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +16,7 @@ public class Usuario {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String username; // Añadido el campo username
 
     @Column(nullable = false)
     private String password;
@@ -25,7 +24,16 @@ public class Usuario {
     @Column(nullable = false)
     private String nombre;
 
-        // Getters y Setters
+    @Column(nullable = false)
+    private String email; // Asegúrate de incluir este campo si lo vas a usar
+
+    @Column(nullable = false)
+    private String tipoUsuario; // Asegúrate de incluir este campo si lo vas a usar
+
+    @Column(nullable = false)
+    private String estado; // Asegúrate de incluir este campo si lo vas a usar
+
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -58,5 +66,27 @@ public class Usuario {
         this.nombre = nombre;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 }
