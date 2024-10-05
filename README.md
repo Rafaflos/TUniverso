@@ -38,10 +38,10 @@ El sistema de **Turismo Universo** es una plataforma de gestión de transporte i
 - Configurar las credenciales de conexión a la base de datos en el archivo application.properties:
   
    ```bash
-spring.datasource.url=jdbc:mysql://localhost:3306/turismo_universo
-spring.datasource.username=tu-usuario
-spring.datasource.password=tu-contraseña
-spring.jpa.hibernate.ddl-auto=update
+    spring.datasource.url=jdbc:mysql://localhost:3306/turismo_universo
+    spring.datasource.username=tu-usuario
+    spring.datasource.password=tu-contraseña
+    spring.jpa.hibernate.ddl-auto=update
 
 
 ## Instalar dependencias con Maven
