@@ -29,8 +29,8 @@ El sistema de **Turismo Universo** es una plataforma de gestión de transporte i
 1. **Clonar el repositorio:**
 
    ```bash
-   git clone https://github.com/tu-usuario/turismo-universo.git
-   cd turismo-universo
+   git clone https://github.com/Rafaflos/TUniverso.git
+
 
 
 ## Configuración de base datos
