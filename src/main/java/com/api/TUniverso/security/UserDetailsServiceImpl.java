@@ -15,12 +15,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepository.findByUsername(username)
+        Usuario usuario = usuarioRepository.findByUsuario(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
 
         return org.springframework.security.core.userdetails.User
-                .withUsername(usuario.getUsername())
-                .password(usuario.getPassword())
+                .withUsername(usuario.getEmail())
+                .password(usuario.getContraseña())
                 .roles("USER") // Cambia los roles según tu lógica
                 .build();
     }

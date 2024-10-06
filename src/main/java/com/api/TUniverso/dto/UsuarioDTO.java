@@ -1,28 +1,23 @@
 package com.api.TUniverso.dto;
 
 public class UsuarioDTO {
-    private Long usuarioId;      // ID del usuario
-    private String username;     // Nombre de usuario
-    private String nombre;       // Nombre completo
-    private String email;        // Correo electrónico
-    private String tipoUsuario;  // Tipo de usuario (cliente, empleado, admin)
-    private String estado;       // Estado del usuario (activo, inactivo)
+    private long usuarioid;
+    private String nombre;
+    private String email;
+    private String contraseña;
+    private String usuario; // Agrega este campo
+    private String tipoUsuario;
+    private String estado;
 
     // Getters y Setters
-    public Long getUsuarioId() {
-        return usuarioId;
+
+
+    public long getUsuarioid() {
+        return usuarioid;
     }
 
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsuarioid(long usuarioid) {
+        this.usuarioid = usuarioid;
     }
 
     public String getNombre() {
@@ -39,6 +34,22 @@ public class UsuarioDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getTipoUsuario() {
