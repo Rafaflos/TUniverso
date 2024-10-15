@@ -14,8 +14,12 @@ public class ViajeController {
     @Autowired
     private ViajeService viajeService;
 
+
+
     @GetMapping("/mis-viajes/{clienteId}")
     public List<Viaje> obtenerHistorialDeViajes(@PathVariable Long clienteId) {
         return viajeService.obtenerViajesPorCliente(clienteId);
     }
+
+
 }

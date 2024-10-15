@@ -1,0 +1,108 @@
+/* Estilos generales */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../Estilos/revers.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.contenedor-principal {
+    display: flex;
+    width: 70%;
+    height: 80vh;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    
+}
+
+/* Sección de Registro */
+.contenedor-izquierda {
+    width: 50%; 
+    padding: 100px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.contenedor-izquierda .registro {
+    margin-top: 40px;
+}
+
+.contenedor-izquierda .registro h3 {
+    font-size: 20px;
+    color: #333;
+}
+
+.contenedor-izquierda .registro a {
+    color: #0f140f;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contenedor-izquierda .registro a:hover {
+    text-decoration: underline;
+}
+
+/* Imagen */
+.imagen img {
+    width: 150%;  
+    height: auto; 
+    margin-left: -100px;
+    margin-bottom: 0;
+}
+
+/* Sección de Iniciar Sesión */
+.contenedor-derecha {
+    width: 50%;
+    padding: 60px;
+    margin-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.contenedor-derecha h2 {
+    font-size: 34px;
+    color: #221e1e;
+    margin-bottom: 20px;
+}
+
+.contenedor-derecha .formulario {
+    width: 100%;
+}
+
+.contenedor-derecha .formulario input {
+    width: 80%; 
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #030303;
+    background-color: #bec4be;
+    border-radius: 10px;
+}
+
+.contenedor-derecha .formulario button {
+    margin-top: 10px;
+    width: 50%; 
+    padding: 10px 20px;
+    border: none;
+    background-color: #9fe4a3;
+    color: rgb(44, 42, 42);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contenedor-derecha .formulario button:hover {
+    background-color: #8ad894;
+}
