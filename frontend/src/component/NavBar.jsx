@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import BurguerButton from './BurguerBotton';
-import './Estilos/Nav.css';
 
 function Navbar() {
+
     const [clicked, setClicked] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -35,6 +35,7 @@ function Navbar() {
                 <Link onClick={handleClick} to="/about">About</Link>
                 <Link onClick={handleClick} to="/services">Services</Link>
                 <Link onClick={handleClick} to="/contact">Contact</Link>
+                <Link onClick={handleClick} to="/login">Login</Link>
             </div>
             <div className='burguer'>
                 <BurguerButton clicked={clicked} handleClick={handleClick} />

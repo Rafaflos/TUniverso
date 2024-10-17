@@ -1,17 +1,7 @@
-/* Estilos generales */
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('../Estilos/logn.png');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+
+
+.container{
+    width: 100%;
 }
 
 .contenedor-principal {
@@ -21,7 +11,8 @@ body, html {
     box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     overflow: hidden;
-    margin:200px
+    margin: 50px auto; /* Ajustar el margen para que sea relativo */
+    flex-direction: row; /* Mantener la dirección de fila por defecto */
   }
 
 /*Iniciar Sesión*/
@@ -34,11 +25,10 @@ body, html {
     justify-content: center;
     align-items: center;
 }
-
-h2 {
-    font-size: 34px;
-    color: #221e1e;
-    margin-bottom: 40px;
+.contenedor-izquierda h2{
+        font-size: 34px;
+        color: #221e1e;
+        margin-bottom: 40px;
 }
 
 .formulario input {
@@ -50,18 +40,15 @@ h2 {
     border-radius: 10px;
     
 }
-
-button {
+.formulario button {
     margin-top: 10px;
-    margin-left: 35%;
-    padding: 10px 20px;
-    border: none;
-    background-color: #9fe4a3;
-    color: rgb(44, 42, 42);
-    border-radius: 5px;
-    cursor: pointer;    
-   
-
+        margin-left: 35%;
+        padding: 10px 20px;
+        border: none;
+        background-color: #9fe4a3;
+        color: rgb(44, 42, 42);
+        border-radius: 5px;
+    cursor: pointer;
 }
 
 button:hover {

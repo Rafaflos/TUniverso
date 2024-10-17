@@ -24,8 +24,11 @@ const cardsData = [
 
 const CardSlider = () => {
     return (
-        <Swiper
-            grabCursor={true}
+    <>
+    <h2>Nuestros destino</h2>
+    <Swiper
+
+        grabCursor={true}
             centeredSlides={true}
             slidesPerView={3}
             spaceBetween={0}
@@ -37,6 +40,7 @@ const CardSlider = () => {
             modules={[Autoplay, Pagination]}
             className="mySwiper"
         >
+
             {cardsData.map((card, index) => (
                 <SwiperSlide key={index}>
                     <div className="card-body">
@@ -49,6 +53,7 @@ const CardSlider = () => {
                 </SwiperSlide>
             ))}
         </Swiper>
+    </>
     );
 }
 
