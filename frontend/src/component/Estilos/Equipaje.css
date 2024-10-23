@@ -1,0 +1,62 @@
+.info {
+    text-align: center;
+    padding: 25px;
+}
+
+/* Contenedor principal con la imagen de fondo */
+.container-equipaje {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 500px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+/* Capa de transparencia */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Transparencia */
+    z-index: 1;
+}
+
+/* Contenido del equipaje */
+.equipaje-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 20px;
+}
+
+.equipaje-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.items1 {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 2px;
+    padding: 15px;
+    margin: 10px;
+    flex: 1;
+    min-width: 400px; /* Ancho mínimo para los elementos */
+    height: 350px;
+}
+
+.items h3 {
+    color: white;
+}
+
+.items1 p {
+    color: white;
+}

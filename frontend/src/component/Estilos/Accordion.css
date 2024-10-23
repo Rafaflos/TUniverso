@@ -1,0 +1,54 @@
+.accordion {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+
+.accordion-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.accordion-content {
+    padding: 15px;
+    background-color: #fff;
+}
+
+.accordion-content p {
+    margin: 0;
+}
+
+.accordion-header:hover {
+    background-color: #e0e0e0;
+}
+
+.accordion-header h2:hover {
+    color: #007bff;
+}
+
+.accordion-item {
+    margin-bottom: 15px;
+    box-shadow: none;
+}
+
+
+.accordion-header {
+    background-color: #f9f9f9;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    border: 1px solid #ddd; /* Opcional, agrega un borde alrededor del encabezado */
+    border-radius: 5px 5px 0 0; /* Solo en la parte superior */
+}
+
+.accordion-content {
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd; /* Borde para el contenido */
+    border-top: none; /* Elimina el borde superior para que se una al encabezado */
+    border-radius: 0 0 5px 5px; /* Solo en la parte inferior */
+}

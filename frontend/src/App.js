@@ -1,29 +1,37 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./component/Pages/Home";
 import About from "./component/Pages/About";
 import Services from "./component/Pages/Services";
 import Contac from "./component/Pages/Contac";
+
+import Commission from "./component/Pages/Commission";
+import Viaje from "./component/Pages/Viaje";
+import Preguntas from "./component/Pages/Preguntas";
+import Equipaje from "./component/Pages/Equipaje";
+
 import Login from "./component/auth/Login";
 import Registration from "./component/auth/Registration";
 
-function App(){
+import ScrollToTop from "./component/Conf/ScrollToTop";
+
+function App() {
   return (
-      <>
-          <BrowserRouter>
-              <Routes>
-                  <Route path="/home" element={<Home/>}/>
-                  <Route path="/about" element={<About/>}/>
-                  <Route path="/services" element={<Services/>}/>
-                  <Route path="/contact" element={<Contac/>}/>
-                  <Route path="/login" element={<Login/>}/>
-                  <Route path="/register" element={<Registration/>}/>
-
-
-              </Routes>
-          </BrowserRouter>
-      </>
-
-  )
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<Contac />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Registration />} />
+        <Route path="/commission" element={<Commission />} />
+        <Route path="/viaje" element={<Viaje />} />
+        <Route path="/preguntas" element={<Preguntas />} />
+        <Route path="/equipaje" element={<Equipaje />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

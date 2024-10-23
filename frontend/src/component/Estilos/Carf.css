@@ -4,15 +4,16 @@
 }
 
 .card h2{
-    font-size: 30px;
-    font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+    font-size: 2.2em;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .card-container {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    padding: 40px;
+    padding: 10px;
 }
 
 .card-body {
@@ -41,11 +42,11 @@
 }
 
 .card-text h3 {
-    font-size: 1.5rem; /* Tamaño del título */
-    margin: 0; /* Sin margen */
+    font-size: 1.5rem;
+    margin: 0;
 }
 
 .card-text p {
-    color: #666; /* Color gris para la descripción */
-    font-size: 1rem; /* Tamaño de la descripción */
+    color: #666;
+    font-size: 1rem;
 }

@@ -1,0 +1,18 @@
+.titulo {
+    padding: 50px;
+}
+
+.titulo h1 {
+    font-size: 35px;
+}
+
+.parrafo {
+    font-size: 20px;
+    text-align: justify;
+    padding: 50px 50px 50px 50px;
+    align-content: space-around;
+}
+
+.parrafo span {
+    color: red;
+}
