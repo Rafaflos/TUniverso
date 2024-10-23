@@ -46,11 +46,22 @@ const LoginRegister = () => {
           {/*// <!--Formulario de Login y registro-->*/}
           <div className="contenedor__login-register">
             {/*// <!--Login-->*/}
-            <form action="" className="formulario__login">
-              <h2>Iniciar Sesión</h2>
-              <input type="text" placeholder="Correo Electronico" />
-              <input type="password" placeholder="Contraseña" />
-              <button>Entrar</button>
+            <form ref={form} onSubmit={sendEmail} className="formulario__login">
+              <h2>Soy Pasajero</h2>
+              <input type="text" name="asunto" placeholder="Asunto" />
+              <input
+                type="text"
+                name="nombre"
+                placeholder="Nombre y Apellidos"
+              />
+              <input type="text" name="telefono" placeholder="Telefono" />
+              <input
+                type="email"
+                name="email"
+                placeholder="Correo Electronico"
+              />
+              <textarea name="message" placeholder="Mensaje" />
+              <button type="submit">Enviar</button>
             </form>
 
             {/*// <!--Register-->*/}
