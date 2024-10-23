@@ -2,6 +2,7 @@ package com.api.TUniverso.controller;
 
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,6 +42,15 @@ public class UsuarioController {
         Usuario usuarioGuardado = usuarioService.guardarUsuario(usuario);
         UsuarioDTO usuarioRespuestaDTO = usuarioMapper.convertirAUsuarioDTO(usuarioGuardado);
         return ResponseEntity.ok(usuarioRespuestaDTO);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody UsuarioDTO usuarioDTO) {
+        if (usuarioService.existsByUsername(usuarioDTO.getUsuario())) {
+            return ResponseEntity.badRequest().body("El usuario ya existe");
+        }
+        usuarioService.save(usuarioDTO);
+        return ResponseEntity.ok("Usuario registrado exitosamente");
     }
 
 }
