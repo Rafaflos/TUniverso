@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../NavBar";
 import Footer from "../common/Footer";
+import UsuariosTable from "../UsuariosTable";
 import "../Estilos/About.css";
 
 function About() {
@@ -69,6 +70,7 @@ function About() {
           </div>
         </div>
       </section>
+      <UsuariosTable />
       <Footer />
     </>
   );

@@ -35,9 +35,13 @@ public class SecurityConfig {
         JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter(authenticationManager);
 
         http
+                .cors()
+                .and()
                 .csrf().disable()
                 .authorizeHttpRequests(authz -> authz
+                        .requestMatchers("/modulo/ping").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/usuarios").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling()
