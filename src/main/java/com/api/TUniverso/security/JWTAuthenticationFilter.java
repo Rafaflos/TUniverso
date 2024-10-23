@@ -12,13 +12,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+@Component
 public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
 
-    private final String secretKey = "tuniverso2024"; // Cambia esto por una clave más segura
+    private final String secretKey = "abc@546"; // Cambia esto por una clave más segura
 
     public JWTAuthenticationFilter(AuthenticationManager authManager) {
         super(authManager);
