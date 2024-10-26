@@ -1,0 +1,74 @@
+.sidebar {
+    width: 260px;
+    background-color: #0a7273;;
+    height: 100vh;
+    padding: 20px;
+    color: white;
+}
+
+.sidebar-menu1 {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-item {
+    margin: 5px 0;
+}
+
+.sidebar-link {
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    color: white;
+}
+
+.sidebar-link i {
+    margin-right: 10px; /* Ajusta la cantidad de espacio entre el icono y el texto */
+}
+
+.sidebar-item span {
+    font-size: 0.9rem;
+}
+
+
+/*interface*/
+.sidebar-heading {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/*linea*/
+.sidebar-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 10px 0;
+}
+
+.submenu1 {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.submenu-item1 {
+    padding: 5px 0;
+    cursor: pointer;
+    background-color: transparent; /* Fondo inicial transparente */
+    color: black; /* Color del texto */
+    list-style-type: none; /* Elimina el punto de la lista */
+    border-radius: 4px; /* Bordes redondeados opcionales */
+}
+
+.submenu-item1:hover {
+    background-color: rgba(128, 128, 128, 0.2); /* Color plomo con transparencia */
+    color: black; /* Mantiene el color del texto negro en hover */
+}
+
+.submenu1 ul {
+    padding-left: 0;
+}
+
+
