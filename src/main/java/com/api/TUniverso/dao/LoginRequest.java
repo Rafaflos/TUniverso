@@ -1,11 +1,11 @@
-package com.api.TUniverso.dto;
+package com.api.TUniverso.dao;
 
-public class LoginRequest  implements java.io.Serializable {
-    private String usuario ;
+public class LoginRequest {
+
+    private String usuario;
     private String contraseña;
 
-    // Getters y setters
-
+    // Getters y Setters
     public String getUsuario() {
         return usuario;
     }

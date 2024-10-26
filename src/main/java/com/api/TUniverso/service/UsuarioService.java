@@ -1,61 +1,61 @@
 package com.api.TUniverso.service;
 
-import java.util.Collections;
+import com.api.TUniverso.Model.Rol;
+import com.api.TUniverso.Model.Usuario;
+import com.api.TUniverso.dao.UsuarioDAO;
+import com.api.TUniverso.repository.RolRepository;
+import com.api.TUniverso.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import java.util.HashSet;
 import java.util.Optional;
-
-import com.api.TUniverso.dto.UsuarioDTO;
-import com.api.TUniverso.model.Rol;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import com.api.TUniverso.model.Usuario;
-import com.api.TUniverso.repository.UsuarioRepository;
+import java.util.Set;
 
 @Service
 public class UsuarioService {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioDAO usuarioDAO; // Cambia a UsuarioRepository si no estás usando DAO
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    // Guarda un usuario en la base de datos
+    @Autowired
+    private RolRepository rolRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    // Guarda un nuevo usuario con un rol por defecto
     public Usuario guardarUsuario(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+        // Encripta la contraseña antes de guardar el usuario
+        usuario.setContraseña(bCryptPasswordEncoder.encode(usuario.getContraseña()));
+
+        // Asigna un rol por defecto (ROLE_USER)
+        Set<Rol> roles = new HashSet<>();
+        Rol userRole = rolRepository.findByNombre("ROLE_USER")
+                .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
+        roles.add(userRole);
+        usuario.setRoles(roles);
+
+        // Guarda el usuario con el rol asignado
+        return usuarioDAO.save(usuario); // O usuarioRepository.save(usuario) si no usas DAO
     }
 
-    // Obtiene un usuario por email
+    // Obtiene un usuario por su email
     public Optional<Usuario> obtenerPorEmail(String email) {
         return usuarioRepository.findByEmail(email);
     }
 
-    // Obtiene un usuario por nombre de usuario
+    // Obtiene un usuario por su nombre de usuario
     public Optional<Usuario> obtenerPorUsuario(String usuario) {
-        return usuarioRepository.findByUsuario(usuario);
+        return usuarioDAO.findByUsuario(usuario); // O usuarioRepository si decides usar Repository
     }
 
-    // Asigna un rol a un usuario
-    public void asignarRolAUsuario(Long usuarioId, Rol rol) {
-        Usuario usuario = usuarioRepository.findById(usuarioId)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        usuario.addRol(rol);
-        usuarioRepository.save(usuario);
+    // Obtiene un usuario por su ID
+    public Optional<Usuario> obtenerPorId(Long id) {
+        return usuarioRepository.findById(id);
     }
-
-    // Verifica si un usuario existe
-    public boolean existsByUsername(String username) {
-        return usuarioRepository.findByUsuario(username).isPresent();
-    }
-
-    // Guarda un nuevo usuario utilizando DTO
-    public void save(UsuarioDTO usuarioDTO) {
-        Usuario usuario = new Usuario();
-        usuario.setUsuario(usuarioDTO.getUsuario());
-        usuario.setContraseña(passwordEncoder.encode(usuarioDTO.getContraseña()));
-        usuario.setRoles(new HashSet<>(Collections.singletonList(new Rol("ROLE_USER"))));  // Asignación del rol por defecto
-        usuarioRepository.save(usuario);
-    }
-
 }

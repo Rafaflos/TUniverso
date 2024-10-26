@@ -1,13 +1,13 @@
-package com.api.TUniverso.repository;
+package com.api.TUniverso.dao;
 
+import com.api.TUniverso.Model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.api.TUniverso.Model.Usuario;
 
 import java.util.Optional;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-    Optional<Usuario> findByEmail(String email);
+public interface UsuarioDAO extends JpaRepository<Usuario, Long> {
     Optional<Usuario> findByUsuario(String usuario);
+    boolean existsByUsuario(String usuario);
 }

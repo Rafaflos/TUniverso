@@ -1,56 +1,58 @@
 package com.api.TUniverso.controller;
 
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import com.api.TUniverso.dto.UsuarioDTO;
-import com.api.TUniverso.model.Usuario;
+import com.api.TUniverso.Model.Rol;
+import com.api.TUniverso.Model.Usuario;
 import com.api.TUniverso.service.UsuarioService;
-import com.api.TUniverso.utils.UsuarioMapper;
+import com.api.TUniverso.repository.RolRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/api/auth")
 public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
 
     @Autowired
-    private UsuarioMapper usuarioMapper;
+    private RolRepository rolRepository;
 
-    @GetMapping("/{usuario}") // Cambiado a "usuario"
-    public ResponseEntity<UsuarioDTO> obtenerUsuario(@PathVariable String usuario) {
-        Optional<Usuario> usuarioOpt = usuarioService.obtenerPorUsuario(usuario); // Cambiado a "usuario"
-        if (usuarioOpt.isPresent()) {
-            UsuarioDTO usuarioDTO = usuarioMapper.convertirAUsuarioDTO(usuarioOpt.get());
-            return ResponseEntity.ok(usuarioDTO);
+    // Endpoint para registrar un nuevo usuario
+    @PostMapping("/register")
+    public ResponseEntity<?> registrarUsuario(@RequestBody Usuario usuario) {
+        if (usuarioService.obtenerPorEmail(usuario.getEmail()).isPresent()) {
+            return ResponseEntity.badRequest().body("El usuario ya existe.");
+        }
+        Usuario nuevoUsuario = usuarioService.guardarUsuario(usuario);
+        return ResponseEntity.ok(nuevoUsuario);
+    }
+
+    // Endpoint para obtener un usuario por su email
+    @GetMapping("/{email}")
+    public ResponseEntity<?> obtenerUsuario(@PathVariable String email) {
+        Optional<Usuario> usuario = usuarioService.obtenerPorEmail(email);
+        if (usuario.isPresent()) {
+            return ResponseEntity.ok(usuario.get());
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @PostMapping
-    public ResponseEntity<UsuarioDTO> guardarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
-        Usuario usuario = usuarioMapper.convertirAUsuario(usuarioDTO);
-        Usuario usuarioGuardado = usuarioService.guardarUsuario(usuario);
-        UsuarioDTO usuarioRespuestaDTO = usuarioMapper.convertirAUsuarioDTO(usuarioGuardado);
-        return ResponseEntity.ok(usuarioRespuestaDTO);
-    }
+    // Endpoint para asignar un rol a un usuario específico
+    @PostMapping("/admin/usuario/{id}/asignarRol")
+    public ResponseEntity<?> asignarRolAUsuario(@PathVariable Long   id, @RequestBody String rolNombre) {
+        Usuario usuario = usuarioService.obtenerPorId(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UsuarioDTO usuarioDTO) {
-        if (usuarioService.existsByUsername(usuarioDTO.getUsuario())) {
-            return ResponseEntity.badRequest().body("El usuario ya existe");
-        }
-        usuarioService.save(usuarioDTO);
-        return ResponseEntity.ok("Usuario registrado exitosamente");
-    }
+        Rol rol = rolRepository.findByNombre(rolNombre)
+                .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
 
+        usuario.getRoles().add(rol);
+        usuarioService.guardarUsuario(usuario);
+
+        return ResponseEntity.ok("Rol asignado exitosamente");
+    }
 }

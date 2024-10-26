@@ -1,4 +1,4 @@
-package com.api.TUniverso.model;
+package com.api.TUniverso.Model;
 
 import jakarta.persistence.*;
 
@@ -126,4 +126,3 @@ public class Usuario {
         roles.add(rol);
     }
 }
-

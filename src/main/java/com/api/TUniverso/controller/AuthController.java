@@ -1,43 +1,44 @@
 package com.api.TUniverso.controller;
 
-import com.api.TUniverso.dto.JwtResponse;
-import com.api.TUniverso.dto.LoginRequest;
-import com.api.TUniverso.security.JwtTokenUtil;
+import com.api.TUniverso.dao.LoginRequest;
+import com.api.TUniverso.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-        @Autowired
-        private AuthenticationManager authenticationManager;
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
-        @Autowired
-        private JwtTokenUtil jwtTokenUtil;
-
-        @PostMapping("/login")
-        public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
+    @PostMapping("/login")
+    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
+        try {
+            // Autenticar al usuario
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsuario(), loginRequest.getContraseña())
             );
 
+            // Establecer el contexto de seguridad
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             // Generar el token JWT
-            String jwt = jwtTokenUtil.generarToken(String.valueOf(authentication));
+            String jwt = jwtTokenProvider.generateToken(authentication);
 
-            return ResponseEntity.ok(new JwtResponse(jwt));
+            // Retornar el token en la respuesta
+            return ResponseEntity.ok(jwt);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(401).body("Credenciales inválidas");
         }
     }
-
-
+}
