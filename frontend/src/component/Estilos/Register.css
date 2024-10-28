@@ -1,0 +1,206 @@
+/* Estilos generales */
+
+
+.contenedor-principal {
+    display: flex;
+    width: 80%;
+    height: auto;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    margin:200px
+}
+
+/*Iniciar Sesión*/
+.contenedor-izquierda {
+    margin-bottom: 90px;
+    width: 70%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-derecha h2 {
+    font-size: 34px;
+    color: #221e1e;
+    margin-bottom: 40px;
+}
+
+.formulario input {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #030303;
+    background-color: #bec4be;
+    border-radius: 10px;
+
+}
+
+.formulario button {
+    margin-top: 10px;
+    margin-left: 35%;
+    padding: 10px 20px;
+    border: none;
+    background-color: #9fe4a3;
+    color: rgb(44, 42, 42);
+    border-radius: 5px;
+    cursor: pointer;
+
+
+}
+
+button:hover {
+    background-color: #9fe4a3;
+}
+
+/* Registro  */
+.contenedor-derecha {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.registro h3 {
+    font-size: 20px;
+    color: #333;
+}
+
+.btn-registrar {
+    padding: 10px 20px;
+    border: 2px solid #4CAF50;
+    background-color: transparent;
+    color: #4CAF50;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-registrar:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Estilo para la imagen */
+.imagen img {
+    /*max-width: 600%;*/
+    width: 600px;
+    height: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*---------------REGISTER--------------------*/
+
+.contenedor-principal {
+    display: flex;
+    width: 70%;
+    height: 80vh;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    
+}
+
+/* Sección de Registro */
+.contenedor-izquierda {
+    width: 50%; 
+    padding: 100px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.contenedor-izquierda .registro {
+    margin-top: 40px;
+}
+
+.contenedor-izquierda .registro h3 {
+    font-size: 20px;
+    color: #333;
+}
+
+.contenedor-izquierda .registro a {
+    color: #0f140f;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contenedor-izquierda .registro a:hover {
+    text-decoration: underline;
+}
+
+/* Imagen */
+.imagen img {
+    width: 150%;  
+    height: auto; 
+    margin-left: -100px;
+    margin-bottom: 0;
+}
+
+/* Sección de Iniciar Sesión */
+.contenedor-derecha {
+    width: 50%;
+    padding: 60px;
+    margin-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.contenedor-derecha h2 {
+    font-size: 34px;
+    color: #221e1e;
+    margin-bottom: 20px;
+}
+
+.contenedor-derecha .formulario {
+    width: 100%;
+}
+
+.contenedor-derecha .formulario input {
+    width: 80%; 
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #030303;
+    background-color: #bec4be;
+    border-radius: 10px;
+}
+
+.contenedor-derecha .formulario button {
+    margin-top: 10px;
+    width: 50%; 
+    padding: 10px 20px;
+    border: none;
+    background-color: #9fe4a3;
+    color: rgb(44, 42, 42);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contenedor-derecha .formulario button:hover {
+    background-color: #8ad894;
+}

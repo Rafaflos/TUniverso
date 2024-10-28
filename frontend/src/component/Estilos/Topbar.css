@@ -1,0 +1,29 @@
+.topbar {
+    width: 1089px; /* Ancho de 700px */
+    height: 60px; /* Altura del topbar */
+    background-color: #e9e3d5; /* Color de fondo */
+    display: flex; /* Usamos flexbox para alinear el contenido */
+    justify-content: flex-end; /* Alinea el contenido a la derecha */
+    align-items: center; /* Centra el contenido verticalmente */
+    padding-right: 20px; /* Un pequeño padding a la derecha */
+    position: fixed; /* Posición fija */
+    top: 0; /* Posicionado en la parte superior */
+    right: 0; /* Pegado a la derecha */
+    box-shadow: 0px 4px 2px -2px #ffffff; /* Sombra sutil */
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.username {
+    margin-right: 10px; /* Espacio entre el nombre y la imagen */
+    font-weight: bold;
+}
+
+.profile-pic {
+    width: 40px; /* Tamaño de la imagen */
+    height: 40px;
+    border-radius: 50%; /* Imagen circular */
+}

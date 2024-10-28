@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.panel img {
+    width: 100%;
+    height: 350px;
+}
+
+.premier-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.premier-content {
+    width: 50%;
+}
+
+.premier-content h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.premier-content h2 {
+    font-size: 24px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.premier-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.feature-item {
+    text-align: center;
+}
+
+.feature-item img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.feature-item span {
+    font-size: 14px;
+}
+
+.premier-image {
+    width: 45%;
+}
+
+.premier-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+/*------------------*/
+.xxxx-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-direction: row-reverse; /* Cambia el orden de los elementos */
+}
+
+.xxxx-content {
+    width: 50%;
+    padding-left: 20px; /* Añade espacio a la izquierda del contenido */
+}
+
+.xxxx-content h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.xxxx-content h2 {
+    font-size: 24px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.xxxx-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.features1 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.feature1-item {
+    text-align: center;
+}
+
+.feature1-item img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.feature1-item span {
+    font-size: 14px;
+}
+
+.xxxx-image {
+    width: 45%;
+    padding-right: 20px; /* Añade espacio a la derecha de la imagen */
+}
+
+.xxxx-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
