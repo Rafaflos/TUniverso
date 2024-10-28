@@ -1,60 +1,42 @@
 package com.api.TUniverso.Model;
 
-import jakarta.persistence.*;
-
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "usuario_id")
-    private Long id;
-
-    @Column(name = "nombre", nullable = false)
+    private int usuario_id;
     private String nombre;
-
-    @Column(name = "email", nullable = false, unique = true)
     private String email;
-
-    @Column(name = "contraseña", nullable = false)
     private String contraseña;
-
-    @Column(name = "tipo_usuario", nullable = false)
-    private String tipoUsuario;
-
-    @Column(name = "fecha_registro", nullable = false)
-    private Timestamp fechaRegistro;;
-
-    @Column(name = "estado", nullable = false)
+    private String tipo_usuario;
     private String estado;
-
-    @Column(name = "usuario", nullable = false, length = 30)
     private String usuario;
 
-    // Relación con roles
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "usuarios_roles",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "rol_id")
-    )
-    private Set<Rol> roles = new HashSet<>();
+    // Constructor vacío
+    public Usuario() {}
 
-    // Getters y setters
-
-
-    public Long getId() {
-        return id;
+    // Constructor completo (útil para crear el usuario con todos los datos)
+    public Usuario(int usuario_id, String nombre, String email, String contraseña, String tipo_usuario, String estado, String usuario) {
+        this.usuario_id = usuario_id;
+        this.nombre = nombre;
+        this.email = email;
+        this.contraseña = contraseña;
+        this.tipo_usuario = tipo_usuario;
+        this.estado = estado;
+        this.usuario = usuario;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    // Getters y Setters para cada atributo
+    public long getUsuario_id() {
+        return usuario_id;
+    }
+
+    public void setUsuario_id(int usuario_id) {
+        this.usuario_id = usuario_id;
     }
 
     public String getNombre() {
@@ -81,20 +63,12 @@ public class Usuario {
         this.contraseña = contraseña;
     }
 
-    public String getTipoUsuario() {
-        return tipoUsuario;
+    public String getTipo_usuario() {
+        return tipo_usuario;
     }
 
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    public Date getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(Timestamp fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
+    public void setTipo_usuario(String tipo_usuario) {
+        this.tipo_usuario = tipo_usuario;
     }
 
     public String getEstado() {
@@ -111,18 +85,5 @@ public class Usuario {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
-    }
-
-    public Set<Rol> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Rol> roles) {
-        this.roles = roles;
-    }
-
-    // Métodos adicionales, como agregar rol
-    public void addRol(Rol rol) {
-        roles.add(rol);
     }
 }

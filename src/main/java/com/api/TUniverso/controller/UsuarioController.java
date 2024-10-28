@@ -1,58 +1,51 @@
 package com.api.TUniverso.controller;
 
-import com.api.TUniverso.Model.Rol;
-import com.api.TUniverso.Model.Usuario;
+import com.api.TUniverso.dto.UsuarioDTO;
 import com.api.TUniverso.service.UsuarioService;
-import com.api.TUniverso.repository.RolRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.Optional;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
 
-@RestController
-@RequestMapping("/api/auth")
-public class UsuarioController {
-
-    @Autowired
+@WebServlet("/api/usuarios")
+public class UsuarioController extends HttpServlet {
     private UsuarioService usuarioService;
 
-    @Autowired
-    private RolRepository rolRepository;
-
-    // Endpoint para registrar un nuevo usuario
-    @PostMapping("/register")
-    public ResponseEntity<?> registrarUsuario(@RequestBody Usuario usuario) {
-        if (usuarioService.obtenerPorEmail(usuario.getEmail()).isPresent()) {
-            return ResponseEntity.badRequest().body("El usuario ya existe.");
-        }
-        Usuario nuevoUsuario = usuarioService.guardarUsuario(usuario);
-        return ResponseEntity.ok(nuevoUsuario);
+    @Override
+    public void init() throws ServletException {
+        usuarioService = new UsuarioService();
     }
 
-    // Endpoint para obtener un usuario por su email
-    @GetMapping("/{email}")
-    public ResponseEntity<?> obtenerUsuario(@PathVariable String email) {
-        Optional<Usuario> usuario = usuarioService.obtenerPorEmail(email);
-        if (usuario.isPresent()) {
-            return ResponseEntity.ok(usuario.get());
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Leer el cuerpo de la solicitud (JSON)
+        StringBuilder jsonBuffer = new StringBuilder();
+        try (BufferedReader reader = req.getReader()) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonBuffer.append(line);
+            }
+        }
+
+        // Convertir JSON a UsuarioDTO
+        ObjectMapper mapper = new ObjectMapper();
+        UsuarioDTO usuarioDTO = mapper.readValue(jsonBuffer.toString(), UsuarioDTO.class);
+
+        // Llamar al servicio para registrar al usuario
+        boolean registrado = usuarioService.registrarUsuario(usuarioDTO);
+
+        // Responder al cliente
+        if (registrado) {
+            resp.setStatus(HttpServletResponse.SC_CREATED);
+            resp.getWriter().write("{\"message\":\"Usuario registrado exitosamente\"}");
         } else {
-            return ResponseEntity.notFound().build();
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.getWriter().write("{\"message\":\"Error al registrar el usuario\"}");
         }
-    }
-
-    // Endpoint para asignar un rol a un usuario específico
-    @PostMapping("/admin/usuario/{id}/asignarRol")
-    public ResponseEntity<?> asignarRolAUsuario(@PathVariable Long   id, @RequestBody String rolNombre) {
-        Usuario usuario = usuarioService.obtenerPorId(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-        Rol rol = rolRepository.findByNombre(rolNombre)
-                .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
-
-        usuario.getRoles().add(rol);
-        usuarioService.guardarUsuario(usuario);
-
-        return ResponseEntity.ok("Rol asignado exitosamente");
     }
 }

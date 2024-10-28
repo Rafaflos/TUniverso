@@ -1,7 +1,11 @@
 package com.api.TUniverso.controller;
 
-import com.api.TUniverso.dao.LoginRequest;
+import com.api.TUniverso.Model.Usuario;
+import com.api.TUniverso.dto.UsuarioDTO;
+import com.api.TUniverso.dto.LoginRequest;
+import com.api.TUniverso.dto.JwtResponse;
 import com.api.TUniverso.security.JwtTokenProvider;
+import com.api.TUniverso.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:63342")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -18,27 +23,40 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
-        try {
-            // Autenticar al usuario
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequest.getUsuario(), loginRequest.getContraseña())
-            );
+    public ResponseEntity<JwtResponse> authenticateUser(@RequestBody LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsuario(), loginRequest.getContraseña())
+        );
 
-            // Establecer el contexto de seguridad
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            // Generar el token JWT
-            String jwt = jwtTokenProvider.generateToken(authentication);
+        // Generar el token JWT
+        String jwt = jwtTokenProvider.generateToken(authentication.getName());
 
-            // Retornar el token en la respuesta
-            return ResponseEntity.ok(jwt);
+        return ResponseEntity.ok(new JwtResponse(jwt));
+    }
 
-        } catch (Exception e) {
-            return ResponseEntity.status(401).body("Credenciales inválidas");
+    @PostMapping("/register")
+    public ResponseEntity<String> registerUser(@RequestBody UsuarioDTO usuarioDTO) {
+        if (usuarioService.obtenerPorUsuario(usuarioDTO.getUsuario()).isPresent()) {
+            return ResponseEntity.badRequest().body("Error: El usuario ya existe.");
         }
+
+        // Convertir UsuarioDTO a Usuario
+        Usuario usuario = new Usuario();
+        usuario.setUsuario(usuarioDTO.getUsuario());
+        usuario.setEmail(usuarioDTO.getEmail());
+        usuario.setContraseña(usuarioDTO.getContraseña());
+        usuario.setTipo_usuario("cliente"); // Asignación por defecto
+        usuario.setEstado("activo");
+
+        usuarioService.registrarUsuario(usuarioDTO);
+        return ResponseEntity.ok("Usuario registrado exitosamente.");
     }
 }

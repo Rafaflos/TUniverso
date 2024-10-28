@@ -1,7 +1,6 @@
-package com.api.TUniverso.dao;
+package com.api.TUniverso.dto;
 
 public class LoginRequest {
-
     private String usuario;
     private String contraseña;
 

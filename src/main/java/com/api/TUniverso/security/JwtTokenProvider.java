@@ -1,61 +1,59 @@
 package com.api.TUniverso.security;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
+import javax.crypto.SecretKey;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Date;
 
-@Service
 @Component
 public class JwtTokenProvider {
 
-    @Value("${app.jwtSecret}")
-    private String jwtSecret;
+    private final SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    @Value("${app.jwtExpirationMs}")
-    private int jwtExpirationMs;
+    @Value("${jwt.expiration}")
+    private long expirationTime;
 
-    // Generar un token JWT basado en la autenticación del usuario
-    public String generateToken(Authentication authentication) {
-        String username = authentication.getName();
+    // Genera un token JWT basado en el nombre de usuario (sin roles)
+    public String generateToken(String username) {
+        Claims claims = Jwts.claims().setSubject(username);
+        Date now = new Date();
+        Date validity = new Date(now.getTime() + expirationTime);
 
         return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .setClaims(claims)
+                .setIssuedAt(now)
+                .setExpiration(validity)
+                .signWith(secretKey)
                 .compact();
     }
 
-    // Obtener el username a partir del token JWT
-    public String getUsernameFromJwt(String token) {
-        return Jwts.parser()
-                .setSigningKey(jwtSecret)
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+    // Resuelve el token desde el encabezado Authorization
+    public String resolveToken(HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
+        }
+        return null;
     }
 
-    // Validar el token JWT
-    public boolean validateJwtToken(String authToken) {
+    // Valida el token
+    public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
+            Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
             return true;
-        } catch (SignatureException e) {
-            System.out.println("Firma JWT no válida: " + e.getMessage());
-        } catch (MalformedJwtException e) {
-            System.out.println("Token JWT mal formado: " + e.getMessage());
-        } catch (ExpiredJwtException e) {
-            System.out.println("Token JWT expirado: " + e.getMessage());
-        } catch (UnsupportedJwtException e) {
-            System.out.println("Token JWT no soportado: " + e.getMessage());
-        } catch (IllegalArgumentException e) {
-            System.out.println("JWT claims vacío: " + e.getMessage());
+        } catch (Exception e) {
+            return false;
         }
+    }
 
-        return false;
+    // Obtiene el nombre de usuario del token
+    public String getUsernameFromToken(String token) {
+        return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().getSubject();
     }
 }

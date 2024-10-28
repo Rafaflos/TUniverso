@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compra de Boletos</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .section { margin-bottom: 20px; }
+    .route, .seat { padding: 10px; margin: 5px; cursor: pointer; }
+    .route:hover, .seat:hover { background-color: #f0f0f0; }
+    .selected { background-color: #90EE90; }
+    button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+    button:disabled { background-color: grey; }
+  </style>
+</head>
+<body>
+
+<h1>Comprar Boletos</h1>
+
+<!-- Selección de Rutas -->
+<div class="section">
+  <h2>1. Selecciona una Ruta</h2>
+  <div id="routes"></div>
+</div>
+
+<!-- Selección de Asientos -->
+<div class="section">
+  <h2>2. Selecciona tus Asientos</h2>
+  <div id="seats"></div>
+</div>
+
+<!-- Confirmación de Compra -->
+<div class="section">
+  <h2>3. Confirmar Compra</h2>
+  <button id="confirmPurchase" disabled>Confirmar Compra</button>
+  <p id="message"></p>
+</div>
+
+<script>
+  let selectedRouteId = null;
+  let selectedSeats = [];
+  let jwtToken = "";  // Aquí coloca el JWT token si es necesario
+
+  // 1. Obtener y mostrar rutas
+  async function fetchRoutes() {
+    try {
+      const response = await fetch("http://localhost:63342/api/rutas", {
+        method: 'GET',
+        headers: { 'Authorization': `Bearer ${jwtToken}` }
+      });
+      const routes = await response.json();
+
+      const routesContainer = document.getElementById("routes");
+      routesContainer.innerHTML = "";
+
+      routes.forEach(route => {
+        const routeDiv = document.createElement("div");
+        routeDiv.classList.add("route");
+        routeDiv.textContent = `${route.origen} - ${route.destino} | Precio: ${route.precio}`;
+        routeDiv.onclick = () => selectRoute(route.ruta_id);
+        routesContainer.appendChild(routeDiv);
+      });
+    } catch (error) {
+      console.error("Error al obtener rutas:", error);
+    }
+  }
+
+  function selectRoute(routeId) {
+    selectedRouteId = routeId;
+    selectedSeats = [];
+    document.getElementById("confirmPurchase").disabled = false;
+    fetchSeats();
+  }
+
+  // 2. Simular selección de asientos
+  function fetchSeats() {
+    const seatsContainer = document.getElementById("seats");
+    seatsContainer.innerHTML = "";
+
+    for (let i = 1; i <= 10; i++) {
+      const seatDiv = document.createElement("div");
+      seatDiv.classList.add("seat");
+      seatDiv.textContent = `Asiento ${i}`;
+      seatDiv.onclick = () => toggleSeatSelection(i);
+      seatsContainer.appendChild(seatDiv);
+    }
+  }
+
+  function toggleSeatSelection(seatNumber) {
+    const index = selectedSeats.indexOf(seatNumber);
+    if (index > -1) {
+      selectedSeats.splice(index, 1);
+    } else {
+      selectedSeats.push(seatNumber);
+    }
+    updateSeatDisplay();
+  }
+
+  function updateSeatDisplay() {
+    const seatsContainer = document.getElementById("seats");
+    Array.from(seatsContainer.children).forEach(seatDiv => {
+      const seatNumber = parseInt(seatDiv.textContent.replace("Asiento ", ""));
+      if (selectedSeats.includes(seatNumber)) {
+        seatDiv.classList.add("selected");
+      } else {
+        seatDiv.classList.remove("selected");
+      }
+    });
+  }
+
+  // 3. Confirmar compra
+  async function confirmPurchase() {
+    const payload = {
+      rutaId: selectedRouteId,
+      asientos: selectedSeats,
+    };
+
+    try {
+      const response = await fetch("http://localhost:63342/api/boletos/comprar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${jwtToken}`
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        document.getElementById("message").textContent = "Compra realizada exitosamente!";
+      } else {
+        document.getElementById("message").textContent = "Error en la compra";
+      }
+    } catch (error) {
+      console.error("Error en la solicitud:", error);
+    }
+  }
+
+  document.getElementById("confirmPurchase").onclick = confirmPurchase;
+  fetchRoutes();
+
+</script>
+
+</body>
+</html>
