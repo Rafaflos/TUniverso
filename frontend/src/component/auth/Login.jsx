@@ -12,7 +12,7 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault(); // Evitar el comportamiento predeterminado del formulario
         try {
-            const response = await axios.post("http://localhost:3001/api/auth/login", {
+            const response = await axios.post("http://localhost:3004/api/auth/login", {
                 usuario: usuario,
                 contraseña: contraseña
             });

@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 @Table(name = "usuarios")
 public class Usuario {
     @Id
-    private int usuario_id;
+    private long usuario_id;
     private String nombre;
     private String email;
     private String contraseña;
@@ -20,7 +20,7 @@ public class Usuario {
     public Usuario() {}
 
     // Constructor completo (útil para crear el usuario con todos los datos)
-    public Usuario(int usuario_id, String nombre, String email, String contraseña, String tipo_usuario, String estado, String usuario) {
+    public Usuario(long usuario_id, String nombre, String email, String contraseña, String tipo_usuario, String estado, String usuario) {
         this.usuario_id = usuario_id;
         this.nombre = nombre;
         this.email = email;
@@ -35,7 +35,7 @@ public class Usuario {
         return usuario_id;
     }
 
-    public void setUsuario_id(int usuario_id) {
+    public void setUsuario_id(Long usuario_id) {
         this.usuario_id = usuario_id;
     }
 

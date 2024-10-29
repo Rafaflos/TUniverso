@@ -4,6 +4,7 @@
     height: 100vh;
     padding: 20px;
     color: white;
+    position: fixed;
 }
 
 .sidebar-menu1 {
@@ -24,7 +25,7 @@
 }
 
 .sidebar-link i {
-    margin-right: 10px; /* Ajusta la cantidad de espacio entre el icono y el texto */
+    margin-right: 10px;
 }
 
 .sidebar-item span {
@@ -52,23 +53,28 @@
     margin-top: 10px;
     border-radius: 5px;
 }
+.submenu1 ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
 .submenu-item1 {
-    padding: 5px 0;
-    cursor: pointer;
-    background-color: transparent; /* Fondo inicial transparente */
-    color: black; /* Color del texto */
-    list-style-type: none; /* Elimina el punto de la lista */
-    border-radius: 4px; /* Bordes redondeados opcionales */
+    display: block;
+    padding: 10px 15px;
+    color: black;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
 .submenu-item1:hover {
-    background-color: rgba(128, 128, 128, 0.2); /* Color plomo con transparencia */
-    color: black; /* Mantiene el color del texto negro en hover */
+    background-color: #00695c; /* Color de fondo al pasar el ratón */
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.submenu1 ul {
-    padding-left: 0;
+.submenu1 ul li + li {
+    margin-top: 5px; /* Espacio entre las filas del submenú */
 }
 
 

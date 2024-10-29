@@ -13,12 +13,10 @@ function Registration() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // No necesitas un token para registrarte por primera vez
-        fetch('http://localhost:3001/api/auth/register', {
+        fetch('http://localhost:3004/api/auth/register', { // Ajusta el puerto según sea necesario
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // No es necesario el Authorization header aquí
             },
             body: JSON.stringify({
                 usuario,
@@ -28,22 +26,22 @@ function Registration() {
         })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Error en la solicitud');
+                    return response.text().then(err => {
+                        throw new Error(err || 'Error en la solicitud');
+                    });
                 }
-                return response.json();
+                return response.text();  // Cambiado para manejar respuesta como texto
             })
             .then(data => {
                 console.log('Success:', data);
-                setSuccess('Usuario registrado exitosamente'); // Mensaje de éxito
-                setTimeout(() => navigate('/login'), 2000); // Redirigir después de 2 segundos
+                setSuccess('Usuario registrado exitosamente');
+                setTimeout(() => navigate('/login'), 2000); // Redirige al login
             })
             .catch(error => {
                 console.error('Error en la solicitud:', error);
-                setError('Error al registrar: ' + error.message); // Muestra el mensaje de error
+                setError(error.message || 'Error al registrar');
             });
-
     };
-
 
     return (
         <div className="contenedor-principal">

@@ -174,7 +174,7 @@ const NavContainer = styled.nav`
     cursor: pointer;
     font-size: 1rem;
     margin-left: 1.5rem;
-    text-decoration: underline;
+    text-decoration: none;
   }
 `;
 

@@ -29,7 +29,7 @@ function Sidebar() {
         <li className="sidebar-item">
           <div className="sidebar-link" onClick={toggleFirstComponent}>
             <i className="fas fa-cog"></i>
-            <span>Mantenimientos Usuario</span>
+            <span>Mantenimientos </span>
             <i
               className={`fas fa-chevron-${isFirstComponentOpen ? "up" : "down"}`}
             ></i>
@@ -43,6 +43,27 @@ function Sidebar() {
                 </Link>
                 <Link to="/conductores" className="submenu-item1">
                   Conductores
+                </Link>
+                <Link to="/usuarios" className="submenu-item1">
+                  Usuarios
+                </Link>
+                <Link to="/rutas" className="submenu-item1">
+                  Rutas
+                </Link>
+                <Link to="/buses" className="submenu-item1">
+                  Buses
+                </Link>
+                <Link to="/empleados" className="submenu-item1">
+                  Empleados
+                </Link>
+                <Link to="/papeletas" className="submenu-item1">
+                  Papeletas
+                </Link>
+                <Link to="/reporte" className="submenu-item1">
+                  Reporte Ventas
+                </Link>
+                <Link to="/sucursales" className="submenu-item1">
+                  Sucursales
                 </Link>
               </ul>
             </div>

@@ -77,6 +77,8 @@ const Footer = () => {
         <FooterNav>
           <StyledLink to="/equipaje">Info para tu viaje</StyledLink>
           <StyledLink to="/preguntas">Preguntas Frecuentes</StyledLink>
+          <StyledLink to="/dashboard">Dashboard</StyledLink>
+
         </FooterNav>
       </FooterSections>
 

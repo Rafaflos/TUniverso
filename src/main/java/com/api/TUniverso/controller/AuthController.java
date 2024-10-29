@@ -1,6 +1,5 @@
 package com.api.TUniverso.controller;
 
-import com.api.TUniverso.Model.Usuario;
 import com.api.TUniverso.dto.UsuarioDTO;
 import com.api.TUniverso.dto.LoginRequest;
 import com.api.TUniverso.dto.JwtResponse;
@@ -14,7 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:63342")
+@CrossOrigin(origins = "http://localhost:3003")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -44,19 +43,17 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody UsuarioDTO usuarioDTO) {
+        // Verifica si el usuario ya existe
         if (usuarioService.obtenerPorUsuario(usuarioDTO.getUsuario()).isPresent()) {
             return ResponseEntity.badRequest().body("Error: El usuario ya existe.");
         }
 
-        // Convertir UsuarioDTO a Usuario
-        Usuario usuario = new Usuario();
-        usuario.setUsuario(usuarioDTO.getUsuario());
-        usuario.setEmail(usuarioDTO.getEmail());
-        usuario.setContraseña(usuarioDTO.getContraseña());
-        usuario.setTipo_usuario("cliente"); // Asignación por defecto
-        usuario.setEstado("activo");
-
-        usuarioService.registrarUsuario(usuarioDTO);
-        return ResponseEntity.ok("Usuario registrado exitosamente.");
+        // Registrar el usuario
+        boolean registrado = usuarioService.registrarUsuario(usuarioDTO);
+        if (registrado) {
+            return ResponseEntity.ok("Usuario registrado exitosamente.");
+        } else {
+            return ResponseEntity.status(500).body("Error al registrar el usuario.");
+        }
     }
 }

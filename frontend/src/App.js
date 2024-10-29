@@ -15,6 +15,19 @@ import Login from "./component/auth/Login";
 import Registration from "./component/auth/Registration";
 
 import ScrollToTop from "./component/Conf/ScrollToTop";
+import Dashboard from "./component/Pages/Dashboard";
+import Administrador from "./component/Dashboard/Administrador";
+import Conductores from "./component/Dashboard/Conductores";
+import Usuarios from "./component/Dashboard/Usuarios";
+import Rutas from "./component/Dashboard/Rutas";
+import Buses from "./component/Dashboard/Buses";
+import Empleados from "./component/Dashboard/Empleados";
+import Papeletas from "./component/Dashboard/Papeletas";
+import Reporte_ventas from "./component/Dashboard/Reporte_ventas";
+
+function Sucursales() {
+  return null;
+}
 
 function App() {
   return (
@@ -33,6 +46,19 @@ function App() {
         <Route path="/preguntas" element={<Preguntas />} />
         <Route path="/equipaje" element={<Equipaje />} />
         <Route path="/compra" element={<Compra />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/administradores" element={<Administrador />} />
+        <Route path="/conductores" element={<Conductores />} />
+        <Route path="/compra" element={<Compra />} />
+        <Route path="/usuarios" element={<Usuarios />} />
+        <Route path="/rutas" element={<Rutas />} />
+        <Route path="/buses" element={<Buses />} />
+        <Route path="/empleados" element={<Empleados />} />
+        <Route path="/papeletas" element={<Papeletas />} />
+        <Route path="/reporte" element={<Reporte_ventas />} />
+        <Route path="/sucursales" element={<Sucursales />} />
+
+
 
       </Routes>
     </BrowserRouter>

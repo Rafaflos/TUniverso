@@ -1,10 +1,10 @@
 import React from "react";
-import Dashboard_Admin from "../common/Dashboard_Admin.jsx";
+import Administrador from "../Dashboard/Administrador";
 
 function Dashboard() {
   return (
     <>
-      <Dashboard_Admin />
+    <Administrador/>
     </>
   );
 }

@@ -6,16 +6,21 @@ import Tabla_cod from "./Tabla_cod";
 
 function Conductores() {
   return (
-    <div>
-      <Sidebar />
-
-      <Topbar />
-      <div style={{ paddingTop: "100px", paddingLeft: "270px" }}>
-        <h1>Contenido de la Conductores</h1>
-        <p>Este es un ejemplo de cómo se ve el contenido debajo del Topbar.</p>
-        <Tabla_cod />
-      </div>
-    </div>
+      <>
+          <div style={{ display: "flex" }}>
+              <Sidebar />
+              <div style={{ flexGrow: 1 }}>
+                  <Topbar />
+                  <div style={{ paddingTop: "70px", margin:"10px" }}>
+                      <h1>Contenido de Conductores</h1>
+                      <p>
+                          Este es un ejemplo de cómo se ve el contenido debajo del Topbar.
+                      </p>
+                      <Tabla_cod />
+                  </div>
+              </div>
+          </div>
+      </>
   );
 }
 
