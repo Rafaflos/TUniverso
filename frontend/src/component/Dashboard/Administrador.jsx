@@ -10,7 +10,7 @@ function Administrador() {
           <Sidebar />
           <div style={{ flexGrow: 1 }}>
             <Topbar />
-            <div style={{ paddingTop: "70px", margin:"10px" }}>
+            <div style={{ paddingTop: "70px", margin:"10px" , paddingLeft:"270px"}}>
               <h1>Contenido de Administradores</h1>
               <p>
                 Este es un ejemplo de cómo se ve el contenido debajo del Topbar.

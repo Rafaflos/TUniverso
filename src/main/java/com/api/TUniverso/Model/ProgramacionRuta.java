@@ -100,6 +100,6 @@ public class ProgramacionRuta {
 }
 // Enum para el estado de la programación
  enum EstadoProgramacion {
-    PROGRAMADO, EN_VIAJE, COMPLETADO, CANCELADO
+    programado, en_viaje, completado, cancelado
 }
 

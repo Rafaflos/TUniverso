@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/rutas")
 public class RutaController {
+
     @Autowired
     private RutaService rutaService;
 

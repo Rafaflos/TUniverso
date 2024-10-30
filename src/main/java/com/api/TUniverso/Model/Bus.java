@@ -83,5 +83,5 @@ public class Bus {
 
 // Enum para el estado del bus
  enum EstadoBus {
-    ACTIVO, INACTIVO
+    activo, inactivo
 }

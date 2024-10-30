@@ -13,7 +13,7 @@ function Registration() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch('http://localhost:3001/api/auth/register', { // Ajusta el puerto según sea necesario
+        fetch('http://localhost:3006/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ function Registration() {
                         throw new Error(err || 'Error en la solicitud');
                     });
                 }
-                return response.text();  // Cambiado para manejar respuesta como texto
+                return response.text();
             })
             .then(data => {
                 console.log('Success:', data);

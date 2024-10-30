@@ -9,9 +9,9 @@ function Login() {
     const [message, setMessage] = useState(null);
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Evitar el comportamiento predeterminado del formulario
+        e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3001/api/auth/login", {
+            const response = await axios.post("http://localhost:3006/api/auth/login", {
                 usuario: usuario,
                 contraseña: contraseña
             });

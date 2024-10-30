@@ -67,7 +67,6 @@ const LoginRegister = () => {
           </div>
         </div>
       </main>
-<Derecha/>
       <Footer />
     </>
   );

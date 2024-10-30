@@ -92,5 +92,5 @@ public class Conductor {
 
 // Enum para el estado del conductor
 enum EstadoConductor {
-    ACTIVO, INACTIVO
+    activo, inactivo
 }
