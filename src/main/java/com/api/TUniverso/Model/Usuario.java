@@ -1,8 +1,9 @@
 package com.api.TUniverso.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "usuarios")
@@ -16,8 +17,12 @@ public class Usuario {
     private String estado;
     private String usuario;
 
+
+
     // Constructor vacío
     public Usuario() {}
+
+
 
     // Constructor completo (útil para crear el usuario con todos los datos)
     public Usuario(long usuario_id, String nombre, String email, String contraseña, String tipo_usuario, String estado, String usuario) {
@@ -28,6 +33,8 @@ public class Usuario {
         this.tipo_usuario = tipo_usuario;
         this.estado = estado;
         this.usuario = usuario;
+
+
     }
 
     // Getters y Setters para cada atributo

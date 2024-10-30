@@ -6,36 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RutaService {
-
     @Autowired
     private RutaRepository rutaRepository;
 
-    // Guardar una nueva ruta
-    public Ruta guardarRuta(Ruta ruta) {
-        return rutaRepository.save(ruta);
-    }
-
-    // Obtener ruta por ID
-    public Optional<Ruta> obtenerRutaPorId(Long id) {
-        return rutaRepository.findById(id);
-    }
-
-    // Obtener todas las rutas
-    public List<Ruta> obtenerTodasLasRutas() {
+    public List<Ruta> findAllRutas() {
         return rutaRepository.findAll();
     }
 
-    // Buscar rutas por origen y destino
-    public List<Ruta> buscarRutasPorOrigenYDestino(String origen, String destino) {
-        return rutaRepository.findByOrigenAndDestino(origen, destino);
+    public Ruta saveRuta(Ruta ruta) {
+        return rutaRepository.save(ruta);
     }
 
-    // Eliminar una ruta por ID
-    public void eliminarRuta(Long id) {
+    public void deleteRuta(Long id) {
         rutaRepository.deleteById(id);
     }
 }
+

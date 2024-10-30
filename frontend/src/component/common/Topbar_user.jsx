@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "../Estilos/Topbar.css";
 import {useNavigate} from "react-router-dom";
 
-function Topbar() {
+function Topbar_user() {
     const navigate = useNavigate();
     const [username, setUsername] = useState(localStorage.getItem("username") || "");
     const handleLogout = () => {
@@ -12,14 +12,14 @@ function Topbar() {
         navigate("/login");
     };
     return (
-    <div className="topbar">
-        <div className="user-info">
-            <h3>Bienvenido {username}</h3>
-            <button onClick={handleLogout} className="logout-button">Cerrar Sesión</button>
-        </div>
+        <div className="topbar">
+            <div className="user-info">
+                <h3>Bienvenido {username} al dashboard cliente</h3>
+                <button onClick={handleLogout} className="logout-button">Cerrar Sesión</button>
+            </div>
 
-    </div>
+        </div>
     );
 }
 
-export default Topbar;
+export default Topbar_user;

@@ -10,7 +10,7 @@ import java.util.Optional;
 public class UsuarioDAO {
     private static final String URL = "jdbc:mysql://localhost:3306/turismo_universo";
     private static final String USER = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "";
 
     // Método para registrar un usuario en la base de datos
     public boolean registrarUsuario(Usuario usuario) {

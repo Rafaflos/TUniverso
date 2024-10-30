@@ -13,7 +13,7 @@ function Registration() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch('http://localhost:3004/api/auth/register', { // Ajusta el puerto según sea necesario
+        fetch('http://localhost:3001/api/auth/register', { // Ajusta el puerto según sea necesario
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

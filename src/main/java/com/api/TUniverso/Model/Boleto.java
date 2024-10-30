@@ -1,7 +1,7 @@
 package com.api.TUniverso.Model;
 
-import  com.api.TUniverso.Model.Usuario;
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
@@ -10,48 +10,88 @@ public class Boleto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "boleto_id")
-    private int boletoId;
+    private Long boletoId;
 
-    @Column(name = "usuario_id", nullable = false)
-    private int usuarioId;
+    // Relación con Cliente
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = true) // Puede ser null para usuarios no registrados
+    private Cliente cliente;
 
-    @Column(name = "ruta_id", nullable = false)
-    private int rutaId;
+    // Relación con Programación de Ruta
+    @ManyToOne
+    @JoinColumn(name = "programacion_ruta_id", nullable = false)
+    private ProgramacionRuta programacionRuta;
 
-    @Column(name = "fecha_compra")
+    private Integer asiento;
+
+    private Boolean equipajeExtra;
+
+    private BigDecimal precioTotal;
+
+    @Enumerated(EnumType.STRING)
+    private EstadoBoleto estado;
+
     private Timestamp fechaCompra;
 
-    @Column(name = "asiento", nullable = false)
-    private int asiento;
+    @Column(unique = true, nullable = false)
+    private String codigoReserva;
 
-    @Column(name = "estado", nullable = false)
-    private String estado;
+    // Getters y Setters
 
-    // Getters y setters
-
-    public int getBoletoId() {
+    public Long getBoletoId() {
         return boletoId;
     }
 
-    public void setBoletoId(int boletoId) {
+    public void setBoletoId(Long boletoId) {
         this.boletoId = boletoId;
     }
 
-    public int getUsuarioId() {
-        return usuarioId;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setUsuarioId(int usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public int getRutaId() {
-        return rutaId;
+    public ProgramacionRuta getProgramacionRuta() {
+        return programacionRuta;
     }
 
-    public void setRutaId(int rutaId) {
-        this.rutaId = rutaId;
+    public void setProgramacionRuta(ProgramacionRuta programacionRuta) {
+        this.programacionRuta = programacionRuta;
+    }
+
+    public Integer getAsiento() {
+        return asiento;
+    }
+
+    public void setAsiento(Integer asiento) {
+        this.asiento = asiento;
+    }
+
+    public Boolean getEquipajeExtra() {
+        return equipajeExtra;
+    }
+
+    public void setEquipajeExtra(Boolean equipajeExtra) {
+        this.equipajeExtra = equipajeExtra;
+    }
+
+    public BigDecimal getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public void setPrecioTotal(BigDecimal precioTotal) {
+        this.precioTotal = precioTotal;
+    }
+
+    public EstadoBoleto getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoBoleto estado) {
+        this.estado = estado;
     }
 
     public Timestamp getFechaCompra() {
@@ -62,33 +102,17 @@ public class Boleto {
         this.fechaCompra = fechaCompra;
     }
 
-    public int getAsiento() {
-        return asiento;
+    public String getCodigoReserva() {
+        return codigoReserva;
     }
 
-    public void setAsiento(int asiento) {
-        this.asiento = asiento;
+    public void setCodigoReserva(String codigoReserva) {
+        this.codigoReserva = codigoReserva;
     }
 
-    public String getEstado() {
-        return estado;
+    // Generación automática del código de reserva
+    @PrePersist
+    protected void generarCodigoReserva() {
+        this.codigoReserva = "BOL-" + System.currentTimeMillis();  // Lógica básica, puedes personalizarla
     }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    // Constructor vacío
-    public Boleto() {}
-
-    // Constructor completo
-    public Boleto(int usuarioId, int rutaId, int asiento, String estado) {
-        this.usuarioId = usuarioId;
-        this.rutaId = rutaId;
-        this.asiento = asiento;
-        this.estado = estado;
-        this.fechaCompra = new Timestamp(System.currentTimeMillis());  // Define la fecha actual
-    }
-
-    // Getters y setters aquí
 }

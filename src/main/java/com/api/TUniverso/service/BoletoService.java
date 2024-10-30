@@ -14,19 +14,33 @@ public class BoletoService {
     @Autowired
     private BoletoRepository boletoRepository;
 
-    public Boleto guardarBoleto(Boleto boleto) {
+    // Crear un nuevo boleto
+    public Boleto crearBoleto(Boleto boleto) {
         return boletoRepository.save(boleto);
     }
 
-    public List<Boleto> obtenerTodosBoletos() {
+    // Obtener todos los boletos
+    public List<Boleto> obtenerTodosLosBoletos() {
         return boletoRepository.findAll();
     }
 
-    public Optional<Boleto> obtenerBoletoPorId(int id) {
+    // Obtener un boleto por ID
+    public Optional<Boleto> obtenerBoletoPorId(Long id) {
         return boletoRepository.findById(id);
     }
 
-    public void eliminarBoleto(int id) {
+    // Obtener un boleto por código de reserva
+    public Optional<Boleto> obtenerBoletoPorCodigoReserva(String codigoReserva) {
+        return boletoRepository.findByCodigoReserva(codigoReserva);
+    }
+
+    // Actualizar un boleto existente
+    public Boleto actualizarBoleto(Boleto boleto) {
+        return boletoRepository.save(boleto);
+    }
+
+    // Eliminar un boleto por ID
+    public void eliminarBoleto(Long id) {
         boletoRepository.deleteById(id);
     }
 }

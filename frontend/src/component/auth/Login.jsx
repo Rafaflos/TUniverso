@@ -8,24 +8,31 @@ function Login() {
     const [contraseña, setContraseña] = useState('');
     const [message, setMessage] = useState(null);
     const navigate = useNavigate();
-
     const handleSubmit = async (e) => {
         e.preventDefault(); // Evitar el comportamiento predeterminado del formulario
         try {
-            const response = await axios.post("http://localhost:3004/api/auth/login", {
+            const response = await axios.post("http://localhost:3001/api/auth/login", {
                 usuario: usuario,
                 contraseña: contraseña
             });
 
+            //es que el dashboard es para clientes y el administradores en para admin
             console.log("Login exitoso:", response.data);
             localStorage.setItem('token', response.data.token); // Guardar el token en el almacenamiento local
             localStorage.setItem('username', usuario); // Guardar el nombre de usuario
 
+            const tipoUsuario = response.data.tipoUsuario;
             setMessage({ text: "Inicio de sesión exitoso", type: "success" });
 
             setTimeout(() => {
-                navigate('/home'); // Redirigir al usuario después de unos segundos al dashboard
-            }, 5000);
+                if (tipoUsuario === 'admin') {
+                    navigate('/administradores'); // Redirigir al dashboard para admins
+                } else {
+                    navigate('/dashboard'); // Redirigir a la página de usuario normal
+                }
+                //como me explico
+            }, 2500);
+            //pipi
 
         } catch (error) {
             if (error.response) {
