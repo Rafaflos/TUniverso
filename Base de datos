@@ -135,6 +135,7 @@ CREATE TABLE IF NOT EXISTS boletos (
     precio_total DECIMAL(10, 2) NOT NULL,
     estado ENUM('reservado', 'pagado', 'cancelado') DEFAULT 'reservado',
     fecha_compra TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    codigo_reserva VARCHAR(15) UNIQUE;
     FOREIGN KEY (cliente_id) REFERENCES clientes(cliente_id) ON DELETE CASCADE,
     FOREIGN KEY (programacion_ruta_id) REFERENCES programacion_rutas(programacion_id) ON DELETE CASCADE
 );
